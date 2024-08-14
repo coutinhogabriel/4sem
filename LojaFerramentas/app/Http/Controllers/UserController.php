@@ -29,7 +29,7 @@ class UserController extends Controller
             'password' => ['required'],
         ]);
 
-
+            // Guarda e valida as informações do banco, exemplo: busca os emails cadastrados
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
@@ -50,7 +50,7 @@ class UserController extends Controller
 
 
     // Processar o registro de um novo usuário
-    public function registro(Request $request)
+    public function registro(Request $request) // Request serve para fazer uma validação,
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -78,10 +78,9 @@ class UserController extends Controller
     {
         Auth::logout();
 
-
-        $request->session()->invalidate();
         $request->session()->regenerateToken();
-
+        $request->session()->invalidate();
+        
 
         return redirect('/');
     }
