@@ -57,6 +57,8 @@ public function IsAdmin()
         return $this->tipo_usuario === 'cliente';
     }
 
+    
+
 }
 
 

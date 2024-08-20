@@ -21,15 +21,15 @@ class UserController extends Controller
     }
 
 
-    // Processar o login do user
-    public function login(Request $request)
+    // Processar o login do usuário
+    public function login(Request $request) //classe request se conecta no navegador, recebe e armazena, efetuando uma validação das informações 
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-            // Guarda e valida as informações do banco, exemplo: busca os emails cadastrados
+        // no if abaixo é para efetuar a validação dentro do banco de dados com os registros cadastrados
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
@@ -45,12 +45,12 @@ class UserController extends Controller
     // Exibir o formulário de registro
     public function showRegistroForm()
     {
-        return view('usuarios.registro');
+        return view('usuarios.registro'); //informar rota das páginas para que no web.php (routes), quando clicarmos no botão de registro puxar as informações
     }
 
 
     // Processar o registro de um novo usuário
-    public function registro(Request $request) // Request serve para fazer uma validação,
+    public function registro(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -59,17 +59,17 @@ class UserController extends Controller
         ]);
 
 
-        $User = User::create([
+        $usuario = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
 
-        // Auth::login($User);
+        Auth::login($usuario); //cadastra o usuário
 
 
-        return redirect('/');
+        return redirect('/dashboard');//após o cadastro já redireciona ele para a pagina interna
     }
 
 
@@ -78,9 +78,11 @@ class UserController extends Controller
     {
         Auth::logout();
 
+
         $request->session()->regenerateToken();
         $request->session()->invalidate();
-        
+        $request->session()->regenerate(); //não é obrigatório
+
 
         return redirect('/');
     }
