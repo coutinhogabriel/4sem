@@ -9,7 +9,7 @@
     </form>
     @if(Auth::user()->isAdmin())
         <div>
-            <a href="/produtos"><h3>Dashborad Produtos - Adm</h3></a>
+            <a href="/livros"><h3>Dashborad Livros - Adm</h3></a>
         </div>
     @endif
 @else
