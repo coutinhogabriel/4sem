@@ -67,8 +67,8 @@ Vamos criar uma aplicação web que permita aos usuários gerenciar suas tarefas
 
 ### Diagrama de Gantt
 
-| Tarefa                                         | Duração  |    Início    |   Término  |
-|------------------------------------------------|----------|--------------|------------|
+| Tarefa                                         | Duração  |    Início   |   Término   |
+|------------------------------------------------|----------|-------------|-------------|
 | Planejamento e Pesquisa                        | 1 semana | 01/09/2024  | 07/09/2024  |
 | Design da Arquitetura                          | 1 semana | 08/09/2024  | 14/09/2024  |
 | Configuração do Ambiente                       | 1 semana | 15/09/2024  | 21/09/2024  |
@@ -119,80 +119,54 @@ Vamos criar uma aplicação web que permita aos usuários gerenciar suas tarefas
 --------------**DIAGRAMAS**------------------
 
 **Diagrama de Classes**
-+----------------+         +-----------------+
-|    User        |         |    Task         |
-+----------------+         +-----------------+
-| - userId: String|        | - taskId: String|
-| - username: String|      | - title: String |
-| - password: String|      | - description: String |
-+-------------------+      | - completed: Boolean |
-| + register()   |         +-----------------+
-| + login()      |         | + createTask()  |
-| + logout()     |         | + updateTask()  |
-+----------------+         | + deleteTask()  |
-                           +-----------------+
+## Diagramas
+
+### Diagrama de Classes
+
+classDiagram
+    class User {
+        - userId: String
+        - username: String
+        - password: String
+        + register()
+        + login()
+        + logout()
+    }
+
+    class Task {
+        - taskId: String
+        - title: String
+        - description: String
+        - completed: Boolean
+        + createTask()
+        + updateTask()
+        + deleteTask()
+    }
+
+    User -- Task : manages
 
 **Diagrama de casos de uso**
 
-+----------------+         +----------------+
-|    User        |         |   System       |
-+----------------+         +----------------+
-       |                          |
-       |  +----------------+      |
-       |  | Register        |     |
-       |  +----------------+      |
-       |  | Login           |     |
-       |  +----------------+      |
-       |  | Logout          |     |
-       |  +----------------+      |
-       |  | Create Task     |     |
-       |  +----------------+      |
-       |  | Update Task     |     |
-       |  +----------------+      |
-       |  | Delete Task     |     |
-       |  +----------------+      |
-       |  | View Tasks      |     |
-       |  +----------------+      |
-       +--------------------------+
+usecaseDiagram
+    actor User
+    User --> (Register)
+    User --> (Login)
+    User --> (Logout)
+    User --> (Create Task)
+    User --> (Update Task)
+    User --> (Delete Task)
+    User --> (View Tasks)
+
 
 **Diagrama de fluxo**
 
-+---------------------+
-|   Start             |
-+---------------------+
-          |
-          v
-+---------------------+
-|   User Login?       |
-+---------------------+
-  | Yes           | No
-  v                |
-+---------------------+
-|   Show Login Page   |
-+---------------------+
-          |
-          v
-+---------------------+
-|   Authenticate User |
-+---------------------+
-          |
-          v
-+---------------------+
-|   Create Task       |
-+---------------------+
-          |
-          v
-+---------------------+
-|   Save Task to DB   |
-+---------------------+
-          |
-          v
-+---------------------+
-|   Show Confirmation |
-+---------------------+
-          |
-          v
-+---------------------+
-|       End           |
-+---------------------+
+flowchart TD
+    Start --> UserLogin
+    UserLogin -->|Yes| AuthenticateUser
+    UserLogin -->|No| ShowLoginPage
+    AuthenticateUser --> CreateTask
+    CreateTask --> SaveTaskToDB
+    SaveTaskToDB --> ShowConfirmation
+    ShowConfirmation --> End
+
 
