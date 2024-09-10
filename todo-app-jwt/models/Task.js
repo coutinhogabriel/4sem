@@ -1,20 +1,24 @@
 import mongoose from "mongoose";
 
+
 const TaskSchema = new mongoose.Schema({
-    userId:{
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
         required: true
     },
     title: {
         type: String,
         required: true
     },
-    completed:{
+    completed: {
         type: Boolean,
         default: false
     }
 });
-const Task = mongoose.models.Task || mongoose.model('task', TaskSchema);
+
+
+const Task = mongoose.models.Task || mongoose.model('Task',TaskSchema);
+
 
 export default Task;

@@ -1,5 +1,5 @@
-import { updateTask, deleteTask } from "@/controllers/TaskController";
-import { NextResponse } from "next/server";
+import { updateTask, deleteTask } from "@/controllers/TaskController"
+import { NextResponse } from "next/server"
 
 
 export async function PUT(request, { params }) {
@@ -16,7 +16,7 @@ export async function PUT(request, { params }) {
 }
 
 
-export async function DELETE(req, {params}) {
+export async function DELETE({params}) {
     try {
         const task = await deleteTask(params.id);
         if (!task) {
