@@ -116,11 +116,20 @@ Vamos criar um sistema que permita aos usuários gerenciar suas finanças de for
   - Designer (opcional)
   - Testador (opcional)
 
-- **Orçamento:**
-  - Desenvolvimento: X horas
-  - Infraestrutura: Y reais
-
 - **Materiais de Referência:**
   - Documentação das tecnologias utilizadas
   - Tutoriais e exemplos relevantes
 
+## Diagramas
+
+### Diagrama de Classe
+
+![Diagrama de Classe](img/DIAGRAMA%20CLASSE.png)
+
+### Diagrama de Casos de Uso
+
+![Diagrama de Casos de Uso](img/DIAGRAMA%20DE%20USO.png)
+
+### Diagrama de Fluxo
+
+![Diagrama de Fluxo](img/DIAGRAMA%20FLUXO.png)
