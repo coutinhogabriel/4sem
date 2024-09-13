@@ -136,4 +136,4 @@ Vamos criar um sistema que permita aos usuários gerenciar suas finanças de for
 
 ### Prototipagem
 
-![Prototipagem](img/prototipagem.png)
+![Prototipagem](img/PROTOTIPAGEM.png)
