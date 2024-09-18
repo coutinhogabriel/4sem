@@ -21,7 +21,7 @@ export default function TasksPage() {
         return;
       }
 
-      const response = await fetch("/api/tasks", {
+      const response = await fetch("/api/task", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,7 +46,7 @@ export default function TasksPage() {
     const token = localStorage.getItem("token");
     console.log("Adicionando tarefa com token:", token);
 
-    const response = await fetch("/api/tasks", {
+    const response = await fetch("/api/task", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export default function TasksPage() {
     const token = localStorage.getItem("token");
     console.log("Deletando tarefa com ID:", id, "e token:", token);
 
-    const response = await fetch("/api/tasks", {
+    const response = await fetch("/api/task", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export default function TasksPage() {
     const token = localStorage.getItem("token");
     console.log("Atualizando tarefa com ID:", editTaskId, "e token:", token);
 
-    const response = await fetch("/api/tasks", {
+    const response = await fetch("/api/task", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

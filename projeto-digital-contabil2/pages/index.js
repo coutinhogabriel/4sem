@@ -13,7 +13,7 @@ const Home = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(null); // Estado para controle de edição
   const [filter, setFilter] = useState(null);
-  const [successMessage, ] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleDone = (id) => {
     setExpenses((prevExpenses) =>
@@ -63,6 +63,7 @@ const Home = () => {
           )
         );
         setIsEditing(null); // Encerra o modo de edição
+        setSuccessMessage("Tarefa editada com sucesso!");
       } else {
         const response = await fetch("/api/task", {
           method: "POST",
@@ -84,13 +85,14 @@ const Home = () => {
           setExpenses((prevExpenses) => [
             ...prevExpenses,
             {
-              id: Date.now(),
+              id: result.id, // Assumindo que o ID é retornado pela API
               name: newTask.title,
               value: adjustedPrice.toFixed(2),
               done: newTask.completed,
               transactionType: newTask.transactionType,
             },
           ]);
+          setSuccessMessage("Tarefa adicionada com sucesso!");
         } else {
           alert(result.message || "Erro desconhecido");
         }
@@ -176,7 +178,7 @@ const Home = () => {
             className={styles.addBtn}
             onClick={() => setIsAdding((prev) => !prev)}
           >
-            {isEditing ? "Editar Tarefa" : "Add Nova Tarefa"}
+            {isEditing ? "Editar Tarefa" : "Adicionar Nova Tarefa"}
           </button>
         </div>
 
@@ -243,7 +245,7 @@ const Home = () => {
         <div className={styles.expenses}>
           {filteredExpenses.map((expense) => (
             <div key={expense.id} className={styles.expenseItem}>
-              <p>{expense.value}</p>
+              <p>R${expense.value}</p>
               <p>
                 {expense.name}{" "}
                 {expense.done && (

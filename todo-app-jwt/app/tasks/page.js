@@ -22,7 +22,7 @@ export default function TasksPage() {
       }
 
 
-      const response = await fetch('/api/tasks', {
+      const response = await fetch('/api/task', {
 	  
         headers: {
           Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ export default function TasksPage() {
 
   const addTask = async () => {
     const token = localStorage.getItem('token');
-    const response = await fetch('/api/tasks', {
+    const response = await fetch('/api/task', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export default function TasksPage() {
 
   const deleteTask = async (id) => {
     const token = localStorage.getItem('token');
-    await fetch(`/api/tasks`, {
+    await fetch(`/api/task`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export default function TasksPage() {
 
   const updateTask = async () => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/tasks`, {
+    const response = await fetch(`/api/task`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

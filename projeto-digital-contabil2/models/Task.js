@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-// Definindo o esquema para Tarefa
+
 const TaskSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Refere-se ao modelo 'User'
+        ref: 'User',
         required: true
     },
     title: {
@@ -17,7 +17,8 @@ const TaskSchema = new mongoose.Schema({
     }
 });
 
-// Verifica se o modelo já existe para evitar redefinir o modelo
-const Task = mongoose.models.Task || mongoose.model('Task', TaskSchema);
+
+const Task = mongoose.models.Task || mongoose.model('Task',TaskSchema);
+
 
 export default Task;

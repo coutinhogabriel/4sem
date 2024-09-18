@@ -1,33 +1,22 @@
-import { getTasks, createTask } from "@/controllers/TaskController";
-import { NextResponse } from "next/server";
+// app/api/task/route.js
 
-// Função para obter todas as tarefas
-export async function GET(request) {
-  try {
-    // Chama a função para obter todas as tarefas do banco de dados
-    const userId = request.user.userId;
-    const tasks = await getTasks(); 
-    return NextResponse.json({ success: true, data: tasks });
-  } catch (error) {
-    // Loga o erro se ocorrer algum problema ao obter as tarefas
-    console.error("Erro ao obter tarefas:", error);
-    return NextResponse.json(
-      { success: false, message: "Erro ao obter tarefas" },
-      { status: 400 } // Retorna status 400 em caso de erro
-    );
-  }
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  // Lógica para obter tarefas
+  const tasks = []; // Substitua com a lógica real para obter tarefas
+  return NextResponse.json({ tasks });
 }
-// POST: criar uma nova tarefa
+
 export async function POST(request) {
-  try {
-    const data = await request.json(); // Corrigido para 'request.json()'
-    const task = await createTask(data);
-    return NextResponse.json({ success: true, data: task });
-  } catch (error) {
-    console.error("Erro ao criar tarefa:", error);
-    return NextResponse.json(
-      { success: false, message: "Erro ao criar tarefa" },
-      { status: 400 }
-    );
-  }
+  const data = await request.json();
+  // Lógica para adicionar uma nova tarefa
+  return NextResponse.json({ task: data });
+}
+
+export async function DELETE(request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+  // Lógica para excluir uma tarefa
+  return NextResponse.json({ success: true });
 }
